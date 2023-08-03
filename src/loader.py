@@ -23,7 +23,7 @@ class DATALoader:
     def area_serach(self, num: int):
         return self.area[num]
 
-    def list_files(self):
+    def list_files(self) -> list[dict[str, str]]:
         data = [self.filter(f) for f in os.listdir(self.data_dir) if os.path.isfile(os.path.join(self.data_dir, f))]
         da = [i for i in data if i is not None]
         s = []
