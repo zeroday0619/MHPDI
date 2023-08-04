@@ -10,7 +10,7 @@ app.include_router(router=root, prefix="/api")
 
 @app.get("/")
 async def read_root():
-    return {"message": app_data.list_files()}
+    return {"message": True}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
