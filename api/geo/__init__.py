@@ -16,7 +16,6 @@ geo_root = APIRouter()
 async def recommend(
     lat: float = Query(..., description="latitude of point"),
     lon: float = Query(..., description="longitude of point"),
-    address: Optional[str] = Query(None, description="address"),
 ):
 
     chunk_data = dict()
@@ -32,8 +31,7 @@ async def recommend(
             "source": None,
             "message": "지원하지 않는 지역입니다."
         }
-
-
+    
     for index in loader.list_files():
         if {*index.keys()}.pop() == geo_code["area1"]:
             chunk_data = index
@@ -56,7 +54,7 @@ async def recommend(
         "status": True,
         "message": None,
         "source": {
-            "address": address,
+            "address": geo_code,
             "data": ps_data
         }
     }

@@ -18,8 +18,8 @@ middleware = [
 
 app = FastAPI(
    middleware=middleware,
-   docs_url=None,
-   redoc_url=None 
+   # docs_url=None,
+   # redoc_url=None 
 )
 app_data = DATALoader()
 app.include_router(router=root, prefix="/api")

@@ -16,8 +16,13 @@ class DataModel(BaseModel):
     Address: AddressModel = Field(..., alias="주소")    
     HomePage: str = Field(..., alias="홈페이지")
 
+class ReverseGeoAddressModel(BaseModel):
+    area1: str
+    area2: str
+    area3: str
+    
 class SourceModel(BaseModel):
-    address: str | None
+    address: ReverseGeoAddressModel
     data: list[DataModel]
 
 class ResponseModel(BaseModel):
