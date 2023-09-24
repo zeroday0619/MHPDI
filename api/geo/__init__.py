@@ -52,6 +52,7 @@ async def recommend(
     ps_data.sort(key=lambda x: x["주소"]["distance"])
     return {
         "status": True,
+        "message": None,
         "source": ps_data
     }
 
