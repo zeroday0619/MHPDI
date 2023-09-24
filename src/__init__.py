@@ -1,3 +1,3 @@
-from src.models import ResponseModels
+from src.models import ResponseModel
 
-__all__ = [ResponseModels]
+__all__ = [ResponseModel]

@@ -1,5 +1,5 @@
 import json
-from src import ResponseModels
+from src import ResponseModel
 from src.ncp import NCP
 from src.loader import DATALoader
 from src.utils import distance
@@ -11,7 +11,7 @@ loader = DATALoader()
 ncp_app = NCP()
 geo_root = APIRouter()
 
-@geo_root.get("/recommend")
+@geo_root.get("/recommend", response_model=ResponseModel)
 async def recommend(
     lat: float = Query(..., description="latitude of point"),
     lon: float = Query(..., description="longitude of point"),
