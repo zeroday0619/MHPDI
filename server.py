@@ -11,6 +11,7 @@ middleware = [
         allow_origins=["https://mental.menhera.kr"],
         allow_credentials=True,
         allow_methods=["GET"],
+        allow_headers=["*"],
     )
 ]
 
