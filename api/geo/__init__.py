@@ -11,7 +11,7 @@ loader = DATALoader()
 ncp_app = NCP()
 geo_root = APIRouter()
 
-@geo_root.get("/recommend", response_model=ResponseModels)
+@geo_root.get("/recommend")
 async def recommend(
     lat: float = Query(..., description="latitude of point"),
     lon: float = Query(..., description="longitude of point"),
