@@ -4,6 +4,8 @@ from src.ncp import NCP
 from src.loader import DATALoader
 from src.utils import distance
 from fastapi import APIRouter, Query
+from uvicorn.main import logger
+
 
 loader = DATALoader()
 ncp_app = NCP()
@@ -18,9 +20,14 @@ async def recommend(
     chunk_data = dict()
     try:
         geo_code = ncp_app.reverse_geocode(lat, lon)
-    except (IndexError, KeyError):
+    except (IndexError, KeyError) as err:
+        if isinstance(err, IndexError):
+            logger.error("ERROR TYPE: IndexError, ERROR MESSAGE: {}".format(err))
+        elif isinstance(err, KeyError):
+            logger.error("ERROR TYPE: KeyError, ERROR MESSAGE: {}".format(err))
         return {
             "status": False,
+            "source": None,
             "message": "지원하지 않는 지역입니다."
         }
 

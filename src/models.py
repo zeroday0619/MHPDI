@@ -20,5 +20,5 @@ class Source(BaseModel):
 
 class ResponseModels(BaseModel):
     status: bool
-    message: Optional[str]
-    source: Optional[list[Source]]
+    message: str | None
+    source: list[Source] | None
