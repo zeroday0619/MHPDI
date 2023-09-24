@@ -2,16 +2,23 @@ import uvicorn
 from api import root
 from src.loader import DATALoader
 from fastapi import FastAPI
+from fastapi.middleware import Middleware
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI()
-app_data = DATALoader()
+middleware = [
+    Middleware(
+        CORSMiddleware,
+        allow_origins=["https://mental.menhera.kr"],
+        allow_credentials=True,
+        allow_methods=["GET"],
+    )
+]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["https://mental.menhera.kr"],
-    allow_credentials=True,
+
+app = FastAPI(
+   middleware=middleware, 
 )
+app_data = DATALoader()
 app.include_router(router=root, prefix="/api")
 
 
