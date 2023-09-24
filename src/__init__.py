@@ -1,3 +1,3 @@
-from src.models import Geodistance
+from src.models import ResponseModel
 
-__all__ = [Geodistance]
+__all__ = [ResponseModel]

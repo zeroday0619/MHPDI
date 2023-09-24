@@ -1,7 +1,5 @@
-import os
-import math
 import json
-from src import Geodistance
+from src import ResponseModel
 from src.ncp import NCP
 from src.loader import DATALoader
 from src.utils import distance
@@ -11,7 +9,7 @@ loader = DATALoader()
 ncp_app = NCP()
 geo_root = APIRouter()
 
-@geo_root.get("/recommend")
+@geo_root.get("/recommend", response_model=ResponseModel)
 async def recommend(
     lat: float = Query(..., description="latitude of point"),
     lon: float = Query(..., description="longitude of point"),
@@ -20,11 +18,12 @@ async def recommend(
     chunk_data = dict()
     try:
         geo_code = ncp_app.reverse_geocode(lat, lon)
-    except IndexError:
+    except (IndexError, KeyError):
         return {
             "status": False,
             "message": "지원하지 않는 지역입니다."
         }
+
 
     for index in loader.list_files():
         if {*index.keys()}.pop() == geo_code["area1"]:
