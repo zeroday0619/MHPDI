@@ -10,14 +10,17 @@ class AddressModel(BaseModel):
     area3: str
     distance: float
 
-class SourceModel(BaseModel):
+class DataModel(BaseModel):
     OrganizationName: str = Field(..., alias="기관명")
     OrganizationType: str = Field(..., alias="기관구분")
     Address: AddressModel = Field(..., alias="주소")    
     HomePage: str = Field(..., alias="홈페이지")
 
+class SourceModel(BaseModel):
+    address: str | None
+    data: list[DataModel]
 
 class ResponseModel(BaseModel):
     status: bool
     message: str | None
-    source: list[SourceModel] | None
+    source: SourceModel | None

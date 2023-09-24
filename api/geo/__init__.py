@@ -1,4 +1,5 @@
 import json
+from typing import Optional
 from src import ResponseModel
 from src.ncp import NCP
 from src.loader import DATALoader
@@ -15,6 +16,7 @@ geo_root = APIRouter()
 async def recommend(
     lat: float = Query(..., description="latitude of point"),
     lon: float = Query(..., description="longitude of point"),
+    address: Optional[str] = Query(None, description="address"),
 ):
 
     chunk_data = dict()
@@ -53,6 +55,9 @@ async def recommend(
     return {
         "status": True,
         "message": None,
-        "source": ps_data
+        "source": {
+            "address": address,
+            "data": ps_data
+        }
     }
 
